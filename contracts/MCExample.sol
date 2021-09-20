@@ -46,13 +46,14 @@ contract MCExample {
       /* TO DO: require campervan to be available on those dates */
       /* require buyer to have enough money to pay */
       require(IERC20(WETH).balanceOf(msg.sender)> price, 'MC: Not enough balance.');
+      // collect payment
       IERC20(WETH).safeTransferFrom(msg.sender, address(this), price);
       bookingIdTracker.increment();
       uint idNumber = bookingIdTracker.current();
       string memory bookingIdentifier = BaseLibrary.append("MC",BaseLibrary.uint2str(idNumber));
+      // plain NFT, should add metadata with more booking info (e.g. picture)
       ERC721 newNFT = new ERC721("MC Booking NFT", bookingIdentifier);
       uint bookingId = _bookingStorage(startDate, endDate, camperId, customerName, msg.sender, price, address(newNFT));
-
   }
 
   function _bookingStorage(
