@@ -10,8 +10,8 @@ def isolate(fn_isolation):
     pass
 
 @pytest.fixture(scope="module")
-def baseContract(BaseContract, accounts):
-    return BaseContract.deploy({'from': accounts[0]})
+def mcExample(MCExample, accounts):
+    return MCExample.deploy({'from': accounts[0]})
 
 
 # @pytest.fixture(scope="module")

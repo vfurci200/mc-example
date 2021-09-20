@@ -46,6 +46,7 @@ contract MCExample {
       /* TO DO: require campervan to be available on those dates */
       /* require buyer to have enough money to pay */
       require(IERC20(WETH).balanceOf(msg.sender)> price, 'MC: Not enough balance.');
+      IERC20(WETH).safeTransferFrom(msg.sender, address(this), price);
       bookingIdTracker.increment();
       uint idNumber = bookingIdTracker.current();
       string memory bookingIdentifier = BaseLibrary.append("MC",BaseLibrary.uint2str(idNumber));
